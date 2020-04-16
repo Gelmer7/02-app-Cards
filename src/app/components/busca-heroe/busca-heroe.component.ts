@@ -3,10 +3,10 @@ import { ActivatedRoute } from '@angular/router'
 import { HeroesService } from '../../services/heroes.service'
 
 @Component({
-  selector: 'app-heroe',
-  templateUrl: './heroe.component.html',
+  selector: 'app-buscaheroe',
+  templateUrl: './busca-heroe.component.html',
 })
-export class HeroeComponent implements OnInit {
+export class BuscaHeroeComponent implements OnInit {
 
   heroe:any = {}
 
@@ -14,7 +14,8 @@ export class HeroeComponent implements OnInit {
                   private _heroesService:HeroesService
     ) {
     this.activatedRoute.params.subscribe( params => {
-      this.heroe = this._heroesService.getHeroe(params['id'])
+      console.log("parametros: ", ['termiBusca'])
+      this.heroe = this._heroesService.buscarHeroes(params['id'])
     })
    }
 

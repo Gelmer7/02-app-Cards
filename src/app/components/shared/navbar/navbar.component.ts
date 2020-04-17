@@ -13,12 +13,16 @@ export class NavbarComponent implements OnInit {
               private route:Router) {
      }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   buscarHeroe(termiBusca:string){
+    termiBusca = this.removerAcentos(termiBusca)
     console.log("termiBuscaNavBAR: ",termiBusca)
     this.route.navigate(['/buscaheroe', termiBusca])
+  }
+
+  removerAcentos(s:string) {
+    return s.normalize('NFD').replace(/[\u0300-\u036f]/g, "")
   }
 
 }

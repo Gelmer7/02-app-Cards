@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { HeroesService } from '../../services/heroes.service'
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-buscaheroe',
@@ -8,18 +9,28 @@ import { HeroesService } from '../../services/heroes.service'
 })
 export class BuscaHeroeComponent implements OnInit {
 
-  heroe:any = {}
-
+  heroes:any = []
+  resultado:boolean = false
+  paramBusca:string = ''
+  
   constructor (   private activatedRoute:ActivatedRoute, 
-                  private _heroesService:HeroesService
-    ) {
-    this.activatedRoute.params.subscribe( params => {
-      console.log("parametros: ", ['termiBusca'])
-      this.heroe = this._heroesService.buscarHeroes(params['id'])
-    })
+                  private _heroesService:HeroesService,
+                  private route:Router) {
    }
-
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe( params => {
+      this.heroes = this._heroesService.buscarHeroes(params['termiBusca'])    
+      let tam = this.heroes.length
+      this.paramBusca = params['termiBusca']
+        if (tam >= 1) {
+          this.resultado = true
+        }else {
+          this.resultado = false
+        }
+    })
+  }
+  verHeroeBusca(idx:number){
+    this.route.navigate(['/heroe', idx])
   }
 
 }

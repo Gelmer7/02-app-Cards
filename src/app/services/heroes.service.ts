@@ -70,18 +70,18 @@ export class HeroesService {
   getHeroe(id: string) {
     return this.heroes[id];
   }
-  buscarHeroes(termiBusca: string) {
-    console.log("entro em servicos")
-    var indexHeroe = 2;
+  buscarHeroes(termiBusca: string):Heroe[] {
+    let heroesArr:any = []
+    termiBusca = termiBusca.toLowerCase()
     for (let i = 0; i < this.heroes.length; i++) {
-      console.log(this.heroes[i].nombre.toLowerCase())
-      console.log("termiBusca: ", termiBusca)
-      if (this.heroes[i].nombre.toLowerCase() == termiBusca) {
-        console.log("acho!!" , i)
+      let heroe = this.heroes[i]
+      let nome = heroe.nombre.toLowerCase()
+      if (nome.indexOf(termiBusca) >= 0) {
+        this.heroes[i].idx = i
+        heroesArr.push(heroe)
       }
-    }
-
-    return this.heroes[indexHeroe];
+    } 
+  return heroesArr
   }
 }
 
@@ -91,4 +91,5 @@ export interface Heroe {
   img: string;
   aparicion: string;
   casa: string;
+  idx?:number
 }

@@ -18,7 +18,8 @@ export class HeroesComponent implements OnInit {
     this.heroes = this._heroesService.getHeroes();
     console.log(this.heroes)
   }
-  verHeroe(idx:number){
+  verHeroePoto(idx:number){
+    console.log("entrou aqui em Heroes!!..")
     this.route.navigate(['/heroe', idx])
   }
 }
